@@ -11,18 +11,14 @@ import sys
 import zipfile
 import time
 import getopt
+import shutil
 from datetime import datetime
+from pathlib import Path
 
-
-
-
-PATH_TO_WORLD = "F:\\Minecraft\\world\\"
 
 dateTimeObj = datetime.now()
-dateObj = dateTimeObj.date()
-datestring = dateObj.strftime("%b%d%Y")
-
-filestring = "world-"+ datestring + ".zip"
+datestring = dateTimeObj.strftime("%b%d%Y%H%M")
+filestring = "world-"+ datestring
 
 #########################
 # function definitions
@@ -35,8 +31,6 @@ def validateArgs():
     if len(sys.argv) != 2 :
         print("Usage: python3 backup-world.py </path/to/world/>")
         exit()
-    
-    PATH_TO_WORLD = sys.argv[1]
     print(PATH_TO_WORLD)
     
 
@@ -59,27 +53,20 @@ def closeBanner():
     print("# Backup : " + filestring + " created succesfully! ")
     print("###############################################################################")
 
-def zipdir(path, ziph):
-    # ziph is zipfile handle
-    for root, dirs, files in os.walk(path):
-        for file in files:
-            print("# zipping file: " + file)
-            ziph.write(os.path.join(root, file))
-
 
 #########################
 # the script part
 #########################
 
+PATH_TO_WORLD = sys.argv[1]
+
 validateArgs()
 
 openBanner()
 
-zipf = zipfile.ZipFile(filestring, 'w', zipfile.ZIP_DEFLATED)
+zippath = Path(PATH_TO_WORLD)
 
-zipdir(PATH_TO_WORLD, zipf)
-
-zipf.close()
+shutil.make_archive(filestring, 'zip', zippath)
 
 closeBanner()
 
