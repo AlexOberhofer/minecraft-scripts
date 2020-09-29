@@ -36,16 +36,16 @@ def validateArgs():
         print("Usage: python3 backup-world.py </path/to/world/>")
         exit()
     
-    PATH_TO_WORLD = sys.argv[1:]
+    PATH_TO_WORLD = sys.argv[1]
     print(PATH_TO_WORLD)
-    exit()
+    
 
-    # validate backup folder exists
-    #if not os.path.exists(PATH_TO_WORLD):
-     #   print("###############################################################################")
-      #  print("# INVALID WORLD PATH!!! : " + PATH_TO_WORLD)
-       # print("###############################################################################")
-        #exit()
+    # validate world folder path exists
+    if not os.path.exists(PATH_TO_WORLD):
+       print("###############################################################################")
+       print("# INVALID WORLD PATH!!! : " + PATH_TO_WORLD)
+       print("###############################################################################")
+       exit()
 
     
 
@@ -63,6 +63,7 @@ def zipdir(path, ziph):
     # ziph is zipfile handle
     for root, dirs, files in os.walk(path):
         for file in files:
+            print("# zipping file: " + file)
             ziph.write(os.path.join(root, file))
 
 
@@ -70,7 +71,7 @@ def zipdir(path, ziph):
 # the script part
 #########################
 
-#validateArgs()
+validateArgs()
 
 openBanner()
 
