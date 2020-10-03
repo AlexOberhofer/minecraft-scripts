@@ -1,2 +1,4 @@
 #/usr/bin/bash
-java -Xmx3G -Xms2048M -jar ./server.jar -nogui
+cd ~/minecraft/
+
+java -Xmx1G -Xms1024M -jar ~/minecraft/server.jar -nogui
