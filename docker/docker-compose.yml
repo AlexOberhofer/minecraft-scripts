@@ -1,0 +1,17 @@
+### Extras
+  minecraft:
+    image: itzg/minecraft-server:latest
+    restart: always
+    container_name: minecraft
+    environment:
+      - EULA=TRUE
+      - OPS=someone
+      - PVP='false'
+      - MEMORY=1G
+      - SPAWN_MONSTERS='true'
+      - VERSION=LATEST
+      - DIFFICULTY=easy
+    ports:
+      - "25565:25565"
+    volumes:
+      - C:\Users\Alex\Documents\minecraft:/data
